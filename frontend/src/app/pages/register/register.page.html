@@ -53,7 +53,7 @@
       >
         <small
           class="form-text text-danger"
-          *ngIf="signup.get('password').errors.required || signup.get('password').errors.min"
+          *ngIf="signup.get('password').errors.required || signup.get('password').errors.minLength()"
         >
         Senha inválida. Mínimo 8 caracteres
         </small>
