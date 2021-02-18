@@ -1,16 +1,17 @@
 <ion-content>
-  <p id="signupText" [routerLink]="'/register'">Sign up</p>
-  <p id="loginText">Log in</p>
-  <div id="inputUser" class="input">
-    <ion-input type="text" placeholder="Usuário" id="userName"></ion-input>
-  </div>
-  <div class="bgInput"></div>
-  <div id="inputPassword" class="input">
-    <ion-input type="text" placeholder="Senha" id="password"></ion-input>
-  </div>
-  <div class="bgInput"></div>
-  <ion-button fill="clear" type="submit" id="button" >
-    Log In
-  </ion-button>
-  <p id="forgotPassword">Forgot your password?</p>
+    <p id="signupText" [routerLink]="'/register'">Sign up</p>
+    <p id="loginText">Log in</p>
+    <form [formGroup]="login" (ngSubmit)="enviou()">
+        <div id="inputUser" class="input">
+            <ion-input type="text" placeholder="Usuário" id="userName" formControlName="userName"></ion-input>
+        </div>
+        <div class="bgInput"></div>
+        <div id="inputPassword" class="input">
+            <ion-input type="password" placeholder="Senha" id="password" formControlName="password"></ion-input>
+        </div>
+        <div class="bgInput"></div>
+        <ion-button fill="clear" type="submit" id="button" [disabled]="!login.valid">
+            Log In
+        </ion-button>
+    </form>
 </ion-content>
