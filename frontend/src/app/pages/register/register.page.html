@@ -1,20 +1,21 @@
 <ion-content>
   <p id="signUpText">Sign Up</p>
-  <div id="iconX">
-    <div id="line1"></div>
-    <div id="line2"></div>
-  </div>
   <p id="login">Login</p>
-  <div id="inputName" class="input">
-    <ion-input type="text" placeholder="Usuário" id="usuario"></ion-input>
-  </div>
+    <div id="inputName" class="input">
+      <ion-input type="text" placeholder="Usuário" id="userName"></ion-input>
+    </div>
+    <div class="bgInput"></div>
+    <div id="inputEmail" class="input">
+      <ion-input type="email" placeholder="Email" id="email"></ion-input>
+    </div>
   <div class="bgInput"></div>
   <div id="inputPassword" class="input">
-    <ion-input type="password" placeholder="Senha" id="senha"></ion-input>
+    <ion-input #inputPassword type="password" placeholder="Senha" id="password"></ion-input>
+    <p #show id="show" (click)="showPassword(inputPassword, show)">Mostrar</p>
   </div>
   <div class="bgInput"></div>
   <div id="button">
-    <p id="buttonText">Sign Up</p>
+    <p id="buttonText"
+    >Sign Up</p>
   </div>
-  <!-- <div id="bgInputPassword"></div> -->
 </ion-content>
