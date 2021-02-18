@@ -1,5 +1,6 @@
 <ion-content>
-  <p id="loginText">Login</p>
+  <p id="signupText" [routerLink]="'/register'">Sign up</p>
+  <p id="loginText">Log in</p>
   <div id="inputUser" class="input">
     <ion-input type="text" placeholder="Usuário" id="userName"></ion-input>
   </div>
@@ -8,8 +9,8 @@
     <ion-input type="text" placeholder="Senha" id="password"></ion-input>
   </div>
   <div class="bgInput"></div>
-  <div id="button">
-    <p id="buttonText">Log In</p>
-  </div>
+  <ion-button fill="clear" type="submit" id="button" >
+    Log In
+  </ion-button>
   <p id="forgotPassword">Forgot your password?</p>
 </ion-content>
