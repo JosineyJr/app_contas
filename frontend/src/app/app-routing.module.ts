@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'conta',
     loadChildren: () => import('./pages/conta/conta.module').then( m => m.ContaPageModule)
   },
+  {
+    path: 'usuario',
+    loadChildren: () => import('./pages/usuario/usuario.module').then( m => m.UsuarioPageModule)
+  },
 ];
 
 @NgModule({
