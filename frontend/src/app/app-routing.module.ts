@@ -23,6 +23,14 @@ const routes: Routes = [
     path: 'conta',
     loadChildren: () => import('./pages/conta/conta.module').then( m => m.ContaPageModule)
   },
+  {
+    path: 'tipoConta',
+    loadChildren: () => import('./pages/tipo-conta/tipo-conta.module').then( m => m.TipoContaPageModule)
+  },
+  {
+    path: 'conta',
+    loadChildren: () => import('./pages/conta/conta.module').then( m => m.ContaPageModule)
+  },
 ];
 
 @NgModule({
