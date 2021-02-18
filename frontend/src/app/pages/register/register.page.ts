@@ -8,7 +8,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class RegisterPage implements OnInit {
   signup = new FormGroup({
-    userName: new FormControl('', Validators.required),
+    userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
       Validators.required,

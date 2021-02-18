@@ -1,7 +1,7 @@
 <ion-content>
   <form [formGroup]="signup" (ngSubmit)="enviou()">
     <p id="signUpText">Sign Up</p>
-    <p id="login">Login</p>
+    <p id="login" [routerLink]="'/login'">Login</p>
     <div id="inputName" class="input">
       <ion-input
         type="text"
@@ -14,9 +14,9 @@
       >
         <small
           class="form-text text-danger"
-          *ngIf="signup.get('userName').errors.required"
+          *ngIf="signup.get('userName').errors.required || signup.get('userName').errors.minlength"
         >
-          Usuário obrigatório
+          Usuário obrigatório. Mínimo 3 caracteres
         </small>
       </div>
     </div>
@@ -53,7 +53,7 @@
       >
         <small
           class="form-text text-danger"
-          *ngIf="signup.get('password').errors.required || signup.get('password').errors.minLength()"
+          *ngIf="signup.get('password').errors.required || signup.get('password').errors.minlength"
         >
         Senha inválida. Mínimo 8 caracteres
         </small>
@@ -61,8 +61,8 @@
       <p #show id="show" (click)="showPassword(inputPassword, show)">Mostrar</p>
     </div>
     <div class="bgInput"></div>
-    <button type="submit" id="button" [disabled]="!signup.valid">
+    <ion-button fill="clear" type="submit" id="button" [disabled]="!signup.valid">
       Sign Up
-    </button>
+    </ion-button>
   </form>
 </ion-content>
