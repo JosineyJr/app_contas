@@ -1,21 +1,42 @@
 <ion-content>
-  <p id="signUpText">Sign Up</p>
-  <p id="login">Login</p>
+  <form [formGroup]="signup" (ngSubmit)="enviou()">
+    <p id="signUpText">Sign Up</p>
+    <p id="login">Login</p>
     <div id="inputName" class="input">
-      <ion-input type="text" placeholder="Usuário" id="userName"></ion-input>
+      <ion-input
+        type="text"
+        placeholder="Usuário"
+        id="userName"
+        formControlName="userName"
+      ></ion-input>
     </div>
     <div class="bgInput"></div>
     <div id="inputEmail" class="input">
-      <ion-input type="email" placeholder="Email" id="email"></ion-input>
+      <ion-input
+        type="email"
+        placeholder="Email"
+        id="email"
+        formControlName="email"
+      ></ion-input>
     </div>
-  <div class="bgInput"></div>
-  <div id="inputPassword" class="input">
-    <ion-input #inputPassword type="password" placeholder="Senha" id="password"></ion-input>
-    <p #show id="show" (click)="showPassword(inputPassword, show)">Mostrar</p>
-  </div>
-  <div class="bgInput"></div>
-  <div id="button">
-    <p id="buttonText"
-    >Sign Up</p>
-  </div>
+    <div class="bgInput"></div>
+    <div id="inputPassword" class="input">
+      <ion-input
+        #inputPassword
+        type="password"
+        placeholder="Senha"
+        id="password"
+        formControlName="password"
+      ></ion-input>
+      <p #show id="show" (click)="showPassword(inputPassword, show)">Mostrar</p>
+    </div>
+    <div class="bgInput"></div>
+    <button
+      type="submit"
+      id="button"
+      [disabled]="!signup.valid"
+    >
+      Sign Up
+    </button>
+  </form>
 </ion-content>

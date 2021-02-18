@@ -113,9 +113,24 @@
   margin-left: auto;
   margin-right: auto;
 
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  /* White */
+
+  color: #ffffff;
+
   background: #d25050;
   border-radius: 100px;
   cursor: pointer;
+}
+
+#button:disabled{
+  color: #b8b6b6;
 }
 
 #buttonText {
@@ -139,6 +154,7 @@
   /* White */
 
   color: #ffffff;
+  background: none;
 
   /* Inside Auto Layout */
 
