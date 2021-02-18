@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -9,10 +10,15 @@ export class RegisterPage implements OnInit {
   signup = new FormGroup({
     userName: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
 
-  constructor() {}
+  constructor(protected titleService: Title) {
+    this.titleService.setTitle('Sign Up');
+  }
 
   ngOnInit() {}
 

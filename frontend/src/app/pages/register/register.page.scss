@@ -46,10 +46,10 @@
 .input {
   position: relative;
   height: 50px;
-  left: -94px;
+  left: -64px;
   // right: 16px;
   top: 128px;
-  width: 150px;
+  width: max-content;
   margin-left: auto;
   margin-right: auto;
   color: #bdbdbd;
@@ -80,11 +80,11 @@
 #show {
   /* Show */
 
-  position: relative;
+  position: absolute;
   width: 60px;
   height: 19px;
   left: 270px;
-  top: -47px;
+  top: -10px;
   z-index: 2;
 
   font-family: Inter;
@@ -162,4 +162,8 @@
   order: 0;
   flex-grow: 0;
   margin: 0px 0px;
+}
+
+.text-danger{
+  color: red;
 }
