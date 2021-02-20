@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -6,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-
-  constructor() { }
+  constructor(protected titleService: Title) {
+    this.titleService.setTitle('Novo Tipo Conta');
+  }
 
   ngOnInit() {}
-
 }

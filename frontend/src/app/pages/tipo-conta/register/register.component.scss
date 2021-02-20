@@ -1,0 +1,91 @@
+#pageHeader {
+  position: absolute;
+  height: 36px;
+  left: 16px;
+  right: 16px;
+  top: 60px;
+}
+
+#tipoContatext {
+  position: relative;
+  width: max-content;
+  height: 36px;
+  // left: calc(50% - 113px / 2 + 2px);
+  margin-left: auto;
+  margin-right: auto;
+  top: 0px;
+
+  /* UI - 30 Semi */
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  text-align: center;
+
+  /* Black */
+
+  color: #000000;
+}
+
+.input {
+  position: relative;
+  height: 50px;
+  left: -59px;
+  // right: 16px;
+  top: 168px;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  color: #bdbdbd;
+}
+
+.bgInput {
+  position: relative;
+  top: 108px;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* Gray/01 */
+
+  background: #f6f6f6;
+  /* Gray/02 */
+
+  border: 1px solid #e8e8e8;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 343px;
+  height: 50px;
+}
+
+#button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 32px;
+  width: 150px;
+  position: relative;
+  height: 51px;
+  top: 125px;
+  // left: 45%;
+  // right: 16px;
+  // bottom: 342px;
+  margin-left: auto;
+  margin-right: auto;
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+
+  /* White */
+
+  color: #ffffff;
+
+  background: #d25050;
+  border-radius: 100px;
+  cursor: pointer;
+}

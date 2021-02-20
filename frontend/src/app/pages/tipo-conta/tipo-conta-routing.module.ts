@@ -10,7 +10,7 @@ const routes: Routes = [
     component: TipoContaPage,
   },
   {
-    path: '/register',
+    path: 'register',
     component: RegisterComponent,
   },
 ];
