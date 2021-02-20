@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-nova-conta',
@@ -6,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nova-conta.component.scss'],
 })
 export class NovaContaComponent implements OnInit {
-
-  constructor() { }
+  constructor(protected titleService: Title) {
+    titleService.setTitle('Nova Conta');
+  }
 
   ngOnInit() {}
-
 }

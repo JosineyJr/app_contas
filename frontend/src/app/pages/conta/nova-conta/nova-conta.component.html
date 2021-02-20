@@ -1,3 +1,34 @@
-<p>
-  nova-conta works!
-</p>
+<ion-content>
+  <div id="pageHeader">
+    <p id="contaText">Conta</p>
+  </div>
+  <div class="input">
+    <ion-input type="text" placeholder="Descrição" id="descricao"></ion-input>
+  </div>
+  <div class="bgInput"></div>
+  <div class="input">
+    <ion-select multiple="false" placeholder="Selecione um tipo" id="tipo">
+      <ion-select-option value="peperoni">Peperoni</ion-select-option>
+      <ion-select-option value="hawaii">Hawaii</ion-select-option>
+    </ion-select>
+  </div>
+  <div class="bgInput"></div>
+  <div class="input">
+    <ion-input type="number" placeholder="Valor" id="valor" min="1"></ion-input>
+  </div>
+  <div class="bgInput"></div>
+  <div class="input">
+    <ion-datetime display-format="DD/MM/YY" placeholder="Data de vencimento" id="dataVencimento"></ion-datetime>
+  </div>
+  <div class="bgInput"></div>
+  <div class="input">
+    <ion-select multiple="false" placeholder="Selecione uma situação" id="situacao">
+      <ion-select-option value="0">Em Aberto</ion-select-option>
+      <ion-select-option value="1">Quitada</ion-select-option>
+    </ion-select>
+  </div>
+  <div class="bgInput"></div>
+  <ion-button fill="clear" type="submit" id="button">
+    Salvar
+</ion-button>
+</ion-content>
