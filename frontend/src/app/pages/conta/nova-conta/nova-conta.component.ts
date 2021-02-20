@@ -22,6 +22,6 @@ export class NovaContaComponent implements OnInit {
   ngOnInit() {}
 
   enviou() {
-    console.log('enviou');
+    console.log(this.conta);
   }
 }
