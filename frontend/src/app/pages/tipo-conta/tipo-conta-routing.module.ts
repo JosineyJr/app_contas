@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TipoContaPage } from './tipo-conta.page';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: TipoContaPage
-  }
+    component: TipoContaPage,
+  },
+  {
+    path: '/register',
+    component: RegisterComponent,
+  },
 ];
 
 @NgModule({
