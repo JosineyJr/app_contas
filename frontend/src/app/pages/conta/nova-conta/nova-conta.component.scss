@@ -31,6 +31,45 @@
   color: #000000;
 }
 
+#voltarText {
+  position: absolute;
+  width: max-content;
+  height: 19px;
+  left: 0px;
+  top: calc(50% - 19px / 2 - 0.5px);
+
+  /* UI - 16 Medium */
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #d25050;
+  cursor: pointer;
+}
+
+#newText {
+  position: absolute;
+  width: max-content;
+  height: 19px;
+  right: 0px;
+  top: 8px;
+
+  /* UI - 16 Medium */
+
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: right;
+
+  color: #d25050;
+  cursor: pointer;
+}
+
 .input {
   position: relative;
   height: 50px;

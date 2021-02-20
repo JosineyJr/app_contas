@@ -1,6 +1,8 @@
 <ion-content>
   <div id="pageHeader">
     <p id="contaText">Conta</p>
+    <p id="voltarText" [routerLink]="['/conta']" routerLinkActive="router-link-active" >Voltar</p>
+    <p id="newText" [routerLink]="['/tipoConta/register']" routerLinkActive="router-link-active" >Novo Tipo Conta</p>
   </div>
   <form (ngSubmit)="enviou()" [formGroup]="conta">
     <div class="input">
