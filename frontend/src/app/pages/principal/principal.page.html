@@ -1,9 +1,27 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>principal</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div id="pageHeader">
+    <p id="menuText">Menu</p>
+  </div>
+  <div id="menu">
+    <p
+      class="opcoes"
+      *ngIf="!logado"
+      [routerLink]="['/login']"
+      routerLinkActive="router-link-active"
+    >
+      Log in
+    </p>
+    <div id="logado" *ngIf="logado">
+      <p
+        class="opcoes"
+        [routerLink]="['/login']"
+        routerLinkActive="router-link-active"
+      >
+        Log out
+      </p>
+      <p class="opcoes" [routerLink]="['/conta']" routerLinkActive="router-link-active" >Minhas contas</p>
+      <p class="opcoes" [routerLink]="['/tipoConta']" routerLinkActive="router-link-active" >Tipos Contas</p>
+      <p class="opcoes" [routerLink]="['/usuario']" routerLinkActive="router-link-active" >Perfil</p>
+    </div>
+  </div>
 </ion-content>
