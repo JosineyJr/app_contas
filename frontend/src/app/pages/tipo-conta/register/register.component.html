@@ -1,21 +1,16 @@
 <ion-content>
-  <div id="pageHeader">
-    <p id="tipoContatext">Tipo Conta</p>
-    <p id="voltarText" [routerLink]="['/tipoConta']" routerLinkActive="router-link-active" >Voltar</p>
-    
-  </div>
-  <form (ngSubmit)="enviou()" #form="ngForm" [formGroup]="tipoConta">
-    <div class="input">
-      <ion-input type="text" placeholder="Tipo" id="tipo"></ion-input>
+    <div id="pageHeader">
+        <p id="tipoContatext">Tipo Conta</p>
+        <p id="voltarText" [routerLink]="['/tipoConta']" routerLinkActive="router-link-active">Voltar</p>
+
     </div>
-    <div class="bgInput"></div>
-    <ion-button
-      fill="clear"
-      type="submit"
-      id="button"
-      [disabled]="!tipoConta.valid"
-    >
-      Salvar
-    </ion-button>
-  </form>
+    <form (ngSubmit)="enviou()" #form="ngForm" [formGroup]="tipoConta">
+        <div class="input">
+            <ion-input type="text" placeholder="Tipo" id="tipo"></ion-input>
+        </div>
+        <div class="bgInput"></div>
+        <ion-button fill="clear" type="submit" id="button" [disabled]="!tipoConta.valid">
+            Salvar
+        </ion-button>
+    </form>
 </ion-content>

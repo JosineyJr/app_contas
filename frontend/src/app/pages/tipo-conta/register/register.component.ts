@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import {} from "@ionic/angular";
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {}
 
   enviou() {
-    console.log(this.tipoConta);
+
   }
 }
