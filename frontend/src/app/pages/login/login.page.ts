@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
     for(var i = 0; i < this.pessoas.length; i++){
       if(this.pessoas[i].userName === this.pessoa.userName && this.pessoas[i].password === this.pessoa.password){
         localStorage.setItem('loginBD', JSON.stringify(this.pessoas[i]));
-        this.navController.navigateBack('/conta');
+        this.navController.navigateBack('/principal');
         controle = true;
       }
     }
