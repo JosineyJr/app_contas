@@ -13,7 +13,7 @@ export class PrincipalPage implements OnInit {
     password: null,
   };
   constructor(protected titleService: Title) {
-    this.titleService.setTitle('Pricipal');
+    this.titleService.setTitle('Principal');
   }
 
   ngOnInit() {
