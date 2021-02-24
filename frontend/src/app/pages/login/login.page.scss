@@ -1,110 +1,128 @@
 #signupText {
-    position: absolute;
-    width: 63px;
-    height: 19px;
-    right: 5px;
-    top: 8px;
-    /* UI - 16 Medium */
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: right;
-    color: #d25050;
-    cursor: pointer;
+  position: absolute;
+  width: 63px;
+  height: 19px;
+  right: 5px;
+  top: 8px;
+  /* UI - 16 Medium */
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: right;
+  color: #d25050;
+  cursor: pointer;
 }
 
 #loginText {
-    /* Log In */
-    position: absolute;
-    width: 88px;
-    height: 36px;
-    left: calc(50% - 88px / 2 + 1.5px);
-    top: 0px;
-    /* UI - 30 Semi */
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 36px;
-    text-align: center;
-    /* Black */
-    color: #000000;
+  /* Log In */
+  position: absolute;
+  width: 88px;
+  height: 36px;
+  left: calc(50% - 88px / 2 + 1.5px);
+  top: 0px;
+  /* UI - 30 Semi */
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  text-align: center;
+  /* Black */
+  color: #000000;
 }
 
 .input {
-    position: relative;
-    height: 50px;
-    left: -59px;
-    // right: 16px;
-    top: 128px;
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
-    color: #bdbdbd;
+  position: relative;
+  height: 50px;
+  left: -59px;
+  // right: 16px;
+  top: 128px;
+  width: max-content;
+  margin-left: auto;
+  margin-right: auto;
+  color: #bdbdbd;
 }
 
 .bgInput {
-    position: relative;
-    // left: 0%;
-    // right: 0%;
-    // top: 0%;
-    // bottom: 0%;
-    top: 68px;
-    margin-left: auto;
-    margin-right: auto;
-    /* Gray/01 */
-    background: #f6f6f6;
-    /* Gray/02 */
-    border: 1px solid #e8e8e8;
-    box-sizing: border-box;
-    border-radius: 8px;
-    width: 343px;
-    height: 50px;
+  position: relative;
+  // left: 0%;
+  // right: 0%;
+  // top: 0%;
+  // bottom: 0%;
+  top: 68px;
+  margin-left: auto;
+  margin-right: auto;
+  /* Gray/01 */
+  background: #f6f6f6;
+  /* Gray/02 */
+  border: 1px solid #e8e8e8;
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 343px;
+  height: 50px;
 }
 
 #button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px 32px;
-    width: 150px;
-    position: relative;
-    height: 51px;
-    top: 95px;
-    // left: 45%;
-    // right: 16px;
-    // bottom: 342px;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: center;
-    /* White */
-    color: #ffffff;
-    background: #d25050;
-    border-radius: 100px;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 32px;
+  width: 150px;
+  position: relative;
+  height: 51px;
+  top: 95px;
+  // left: 45%;
+  // right: 16px;
+  // bottom: 342px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  /* White */
+  color: #ffffff;
+  background: #d25050;
+  border-radius: 100px;
+  cursor: pointer;
 }
 
 #forgotPassword {
-    position: relative;
-    width: 178px;
-    height: 19px;
-    // left: calc(50% - 178px / 2 + 0.5px);
-    // bottom: 515px;
-    margin-left: auto;
-    margin-right: auto;
-    top: 95px;
-    /* UI - 16 Semi */
-    font-family: Inter;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 19px;
-    color: #d25050;
+  position: relative;
+  width: 178px;
+  height: 19px;
+  // left: calc(50% - 178px / 2 + 0.5px);
+  // bottom: 515px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 95px;
+  /* UI - 16 Semi */
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 19px;
+  color: #d25050;
+}
+
+#show {
+  /* Show */
+  position: absolute;
+  width: 60px;
+  height: 19px;
+  left: 270px;
+  top: -10px;
+  z-index: 2;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: right;
+  color: #d25050;
+  cursor: pointer;
 }

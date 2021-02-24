@@ -7,7 +7,8 @@
         </div>
         <div class="bgInput"></div>
         <div id="inputPassword" class="input">
-            <ion-input type="password" placeholder="Senha" id="password" formControlName="password"></ion-input>
+            <ion-input type="password"#inputPassword placeholder="Senha" id="password" formControlName="password"></ion-input>
+            <p #show id="show" (click)="showPassword(inputPassword, show)">Mostrar</p>
         </div>
         <div class="bgInput"></div>
         <ion-button fill="clear" type="submit" id="button" [disabled]="!login.valid">
