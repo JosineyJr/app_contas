@@ -31,7 +31,7 @@
 
     <!-- LISTAGEM DAS CONTAS -->
     <div id="dataContas" *ngFor="let conta of contasUsuario; let even = even; let odd = odd">
-        <div class="conta">
+        <div class="conta" [routerLink]="['/principal/']" routerLinkActive="router-link-active" >
             <div class="icon alt" *ngIf="even"></div>
             <div class="icon" *ngIf="odd"></div>
             <div class="item">
