@@ -1,11 +1,11 @@
 <ion-content>
-  <div id="pageHeader">
-    <p id="contaText">Minhas Contas</p>
-    <p id="voltar" [routerLink]="['/principal']" routerLinkActive="router-link-active" >Menu</p>
-    <p id="novaConta" [routerLink]="['/conta/register']" routerLinkActive="router-link-active" >Nova</p>
-  </div>
-  <div id="gastos">
-    <svg>
+    <div id="pageHeader">
+        <p id="contaText">Minhas Contas</p>
+        <p id="voltar" [routerLink]="['/principal']" routerLinkActive="router-link-active">Menu</p>
+        <p id="novaConta" [routerLink]="['/conta/register']" routerLinkActive="router-link-active">Nova</p>
+    </div>
+    <div id="gastos">
+        <svg>
       <circle
         [ngStyle]="{ 'stroke-dashoffset': setStroke()  }"
         id="circle"
@@ -15,31 +15,29 @@
         fill="none"
       />
     </svg>
-    <!-- <ion-button (click)="animacao(circle)" expand="block" fill="clear" shape="round">
+        <!-- <ion-button (click)="animacao(circle)" expand="block" fill="clear" shape="round">
       teste animação
     </ion-button> -->
-    <ion-text id="totalMes" color="danger">
-      <p>R$ {{currentMonth}}</p>
-    </ion-text>
-    <p id="relacaoMesPassado" *ngIf="getPercentage() < 1">
-      {{100 - (getPercentage() * 100)}}% à menos do que mês passado
-    </p>
-    <p id="relacaoMesPassado" *ngIf="getPercentage() >= 1">
-      {{arredondar((getPercentage() * 100) - 100)}}% à mais do que mês passado
-    </p>
-  </div>
+        <ion-text id="totalMes" color="danger">
+            <p>R$ {{currentMonth}}</p>
+        </ion-text>
+        <p id="relacaoMesPassado" *ngIf="getPercentage() < 1">
+            {{100 - (getPercentage() * 100)}}% à menos do que mês passado
+        </p>
+        <p id="relacaoMesPassado" *ngIf="getPercentage() >= 1">
+            {{arredondar((getPercentage() * 100) - 100)}}% à mais do que mês passado
+        </p>
+    </div>
 
-  <!-- LISTAGEM DAS CONTAS -->
-  <div id="dataContas">
-    <div class="conta">
-      <div class="icon alt"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
+    <!-- LISTAGEM DAS CONTAS -->
+    <div id="dataContas" *ngFor="let conta of contasUsuario; let even = even; let odd = odd">
+        <div class="conta">
+            <div class="icon alt" *ngIf="even"></div>
+            <div class="icon" *ngIf="odd"></div>
+            <div class="item">
+                <p>{{conta.descricao}}</p>
+            </div>
+            <div class="divider"></div>
+        </div>
     </div>
-    <div class="conta">
-      <div class="icon"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-  </div>
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import {NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-usuario',
@@ -13,11 +14,15 @@ export class UsuarioPage implements OnInit {
     password: null,
   };
 
-  constructor(protected titleService: Title) {
+  constructor(protected titleService: Title, protected navController: NavController) {
   }
 
   ngOnInit() {
-    this.usuario = JSON.parse(localStorage.getItem('loginBD'));
+    if(JSON.parse(localStorage.getItem('loginBD'))){
+      this.usuario = JSON.parse(localStorage.getItem('loginBD'));
+    }else{
+      this.navController.navigateBack("/login");
+    }
     this.titleService.setTitle(this.usuario.userName);
   }
 }

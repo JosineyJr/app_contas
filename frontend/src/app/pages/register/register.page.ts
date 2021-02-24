@@ -57,6 +57,7 @@ export class RegisterPage implements OnInit {
     this.exibirMensagem('Usuário cadastrado!!!');
 
     this.navController.navigateBack('/login');
+    window.location.href = window.location.href.replace('register', 'login');
   }
 
   verificarUsuario(userName: any): Boolean{
@@ -66,9 +67,9 @@ export class RegisterPage implements OnInit {
     for(var i = 0; i< this.pessoas.length; i++){
       if(userName === this.pessoas[i].userName){
         return true;
-      }  
+      }
     }
-    
+
     return false;
   }
 
@@ -81,9 +82,9 @@ export class RegisterPage implements OnInit {
     for(var i = 0; i< this.pessoas.length; i++){
       if(email === this.pessoas[i].email){
         return true;
-      }  
+      }
     }
-    
+
     return false;
   }
 

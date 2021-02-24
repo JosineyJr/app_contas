@@ -1,60 +1,17 @@
 <ion-content>
-  <div id="pageHeader">
-    <p id="contasText">Contas</p>
-    <p id="logoutText" [routerLink]="['/principal']" routerLinkActive="router-link-active" >Menu</p>
-    <p id="newText" [routerLink]="['/tipoConta/register']" routerLinkActive="router-link-active" >Novo</p>
-  </div>
-  <p id="tipoContas">Tipo de contas</p>
-  <div id="dataContas">
-    <div class="conta">
-      <div class="icon alt"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
+    <div id="pageHeader">
+        <p id="logoutText" [routerLink]="['/principal']" routerLinkActive="router-link-active">Menu</p>
+        <p id="newText" [routerLink]="['/tipoConta/register']" routerLinkActive="router-link-active">Novo</p>
     </div>
-    <div class="conta">
-      <div class="icon"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
+    <p id="tipoContas">Tipo de contas</p>
+    <div id="dataContas" *ngFor="let tipo of tiposContas; let even = even; let odd = odd">
+        <div class="conta">
+            <div class="icon alt" *ngIf="even"></div>
+            <div class="icon" *ngIf="odd"></div>
+            <div class="item">
+                <p>{{tipo.nomeTipo}}</p>
+            </div>
+            <div class="divider"></div>
+        </div>
     </div>
-    <div class="conta">
-      <div class="icon alt"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-    <div class="conta">
-      <div class="icon"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-    <div class="conta">
-      <div class="icon alt"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-    <div class="conta">
-      <div class="icon"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-    <div class="conta">
-      <div class="icon alt"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-    <div class="conta">
-      <div class="icon"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-    <div class="conta">
-      <div class="icon alt"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-    <div class="conta">
-      <div class="icon"></div>
-      <div class="item"><p>Item</p></div>
-      <div class="divider"></div>
-    </div>
-  </div>
 </ion-content>

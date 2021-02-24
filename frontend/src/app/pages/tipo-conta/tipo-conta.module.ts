@@ -15,7 +15,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     IonicModule,
     TipoContaPageRoutingModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   declarations: [TipoContaPage, RegisterComponent],
 })

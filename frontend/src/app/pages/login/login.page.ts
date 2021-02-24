@@ -47,6 +47,7 @@ export class LoginPage implements OnInit {
         localStorage.setItem('loginBD', JSON.stringify(this.pessoas[i]));
         this.navController.navigateBack('/principal');
         controle = true;
+        window.location.href = window.location.href.replace('login', 'principal');
       }
     }
 
