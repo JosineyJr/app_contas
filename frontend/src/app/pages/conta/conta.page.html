@@ -19,7 +19,7 @@
       teste animação
     </ion-button> -->
         <ion-text id="totalMes" color="danger">
-            <p>R$ {{currentMonth}}</p>
+            <p>R$ {{totalContas()}}</p>
         </ion-text>
         <p id="relacaoMesPassado" *ngIf="getPercentage() < 1">
             {{100 - (getPercentage() * 100)}}% à menos do que mês passado
@@ -35,7 +35,7 @@
             <div class="icon alt" *ngIf="even"></div>
             <div class="icon" *ngIf="odd"></div>
             <div class="item">
-                <p>{{conta.descricao}}</p>
+                <p>{{conta.descricao + " - " + obterData(conta.dataVencimento)}}</p>
             </div>
             <div class="divider"></div>
         </div>
