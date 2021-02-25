@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'register',
     component: NovaContaComponent,
   },
+  {
+    path: 'register/:id',
+    component: NovaContaComponent,
+  },
 ];
 
 @NgModule({

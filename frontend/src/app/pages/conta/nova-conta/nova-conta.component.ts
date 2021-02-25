@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { NavController, ToastController } from '@ionic/angular';
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
+import {ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'app-nova-conta',
@@ -11,10 +12,12 @@ import { uuid } from 'uuidv4';
 })
 export class NovaContaComponent implements OnInit {
   usuario: any;
+  uuid = null;
   tiposContas: any;
+  indice = null;
   contas: any = [];
   Iconta = {
-    id: '',
+    id: null,
     descricao: null,
     tipo: null,
     valor: null,
@@ -33,6 +36,7 @@ export class NovaContaComponent implements OnInit {
     protected titleService: Title,
     protected navController: NavController,
     private toastController: ToastController,
+    private activatedRoute: ActivatedRoute
   ) {
     titleService.setTitle('Nova Conta');
   }
@@ -51,6 +55,17 @@ export class NovaContaComponent implements OnInit {
     } else {
       this.navController.navigateBack('/login');
     }
+    this.activatedRoute.params.subscribe( param => {
+      if(param['id']){
+        for(var i = 0; i < this.contas.length; i++){
+          if(this.contas[i].id == param['id']){
+            this.Iconta = this.contas[i];
+            this.uuid = this.contas[i].id;
+            this.indice = i;
+          }
+        }
+      }
+    });
 
     this.conta.get('descricao').setValue(this.Iconta.descricao);
     this.conta.get('tipo').setValue(this.Iconta.tipo);
@@ -60,21 +75,33 @@ export class NovaContaComponent implements OnInit {
   }
 
   enviou() {
-    // this.Iconta.id = uuid();
-    this.Iconta.descricao = this.conta.value.descricao;
-    this.Iconta.tipo = this.conta.value.tipo;
-    this.Iconta.valor = this.conta.value.valor;
-    this.Iconta.dataVencimento = this.conta.value.dataVencimento;
-    this.Iconta.situacao = this.conta.value.situacao;
-    this.Iconta.usuario = this.usuario;
-
     this.contas = JSON.parse(localStorage.getItem('contaBD'));
 
-    this.contas.push(this.Iconta);
+    if(this.uuid){
+      if(this.contas.find( conta => conta.id === this.uuid)){
+        this.Iconta.id = this.uuid;
+        this.Iconta.descricao = this.conta.value.descricao;
+        this.Iconta.tipo = this.conta.value.tipo;
+        this.Iconta.valor = this.conta.value.valor;
+        this.Iconta.dataVencimento = this.conta.value.dataVencimento;
+        this.Iconta.situacao = this.conta.value.situacao;
+        this.Iconta.usuario = this.usuario;
+        this.contas[this.indice] = this.Iconta;
+        this.exibirMensagem('Conta Editada!!!');
+      }
+    }else{
+      this.Iconta.id = uuid();
+      this.Iconta.descricao = this.conta.value.descricao;
+      this.Iconta.tipo = this.conta.value.tipo;
+      this.Iconta.valor = this.conta.value.valor;
+      this.Iconta.dataVencimento = this.conta.value.dataVencimento;
+      this.Iconta.situacao = this.conta.value.situacao;
+      this.Iconta.usuario = this.usuario;
+      this.contas.push(this.Iconta);
+      this.exibirMensagem('Conta cadastrada!!!');
+    }
 
     localStorage.setItem('contaBD', JSON.stringify(this.contas));
-
-    this.exibirMensagem('Conta cadastrada!!!');
 
     this.navController.navigateBack('/conta');
     window.location.href = window.location.href.replace('register', '');
