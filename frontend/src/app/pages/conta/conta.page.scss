@@ -60,6 +60,7 @@
 }
 
 #gastos {
+  // text-align: ;
   position: relative;
   width: 236px;
   height: 236px;
@@ -94,12 +95,16 @@ svg {
   // margin-right: auto;
 }
 
-#relacaoMesPassado {
+#relacaoMesPassado,#contasMes {
   position: relative;
   font-size: 10pt;
   color: #adadad;
   top: -90%;
   left: 7.5%;
+}
+
+#contasMes{
+  left: 30.5%
 }
 
 #dataContas {

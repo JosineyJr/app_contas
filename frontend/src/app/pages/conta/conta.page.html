@@ -39,6 +39,7 @@
     <p id="relacaoMesPassado" *ngIf="getPercentage() >= 1 && lastMonth">
       {{arredondar((getPercentage() * 100) - 100)}}% à mais do que mês passado
     </p>
+    <p id="contasMes" *ngIf="!lastMonth" >Total no mês</p>
   </div>
 
   <!-- LISTAGEM DAS CONTAS -->
