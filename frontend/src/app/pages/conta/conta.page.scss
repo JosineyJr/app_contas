@@ -105,13 +105,14 @@ svg {
 #dataContas {
   position: relative;
   width: 70%;
+  height: max-content;
   margin-left: auto;
   margin-right: auto;
 }
 
 .conta {
   position: relative;
-  width: 90%;
+  width: 95%;
   height: max-content;
   left: 16px;
   top: 180px;
@@ -137,7 +138,7 @@ svg {
   /* Item */
   position: relative;
   width: max-content;
-  height: 19px;
+  height: max-content;
   left: 20px;
   top: 15px;
   /* UI - 16 Medium */
@@ -158,4 +159,10 @@ svg {
   top: 35px;
   /* Gray/02 */
   border: 1px solid #e8e8e8;
+}
+
+#lixeira {
+  position: absolute;
+  top: 11px;
+  left: 90%;
 }
