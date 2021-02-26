@@ -33,10 +33,10 @@
     <ion-text id="totalMes" color="danger">
       <p>R$ {{currentMonth}}</p>
     </ion-text>
-    <p id="relacaoMesPassado" *ngIf="getPercentage() < 1">
+    <p id="relacaoMesPassado" *ngIf="getPercentage() < 1 && lastMonth">
       {{arredondar(100 - (getPercentage() * 100))}}% à menos do que mês passado
     </p>
-    <p id="relacaoMesPassado" *ngIf="getPercentage() >= 1">
+    <p id="relacaoMesPassado" *ngIf="getPercentage() >= 1 && lastMonth">
       {{arredondar((getPercentage() * 100) - 100)}}% à mais do que mês passado
     </p>
   </div>
