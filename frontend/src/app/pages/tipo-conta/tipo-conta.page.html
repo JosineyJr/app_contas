@@ -8,9 +8,11 @@
         <div class="conta">
             <div class="icon alt" *ngIf="even"></div>
             <div class="icon" *ngIf="odd"></div>
-            <div class="item">
+            <div class="item" [routerLink]="['/tipoConta/register/' + tipo.nomeTipo]" routerLinkActive="router-link-active">
                 <p>{{tipo.nomeTipo}}</p>
             </div>
+            <img src="../../../assets/trash.png" (click)="excluir(tipo.nomeTipo)" alt="lixeira" width="25" id="lixeira" />
+            <div class="divider"></div>
             <div class="divider"></div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import {NavController} from '@ionic/angular';
+import {NavController, AlertController} from '@ionic/angular';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {NavController} from '@ionic/angular';
 export class TipoContaPage implements OnInit {
   user: any;
   tiposContas: any = [];
-  constructor(protected titleService: Title, protected navController: NavController) {
+  constructor(protected titleService: Title, protected navController: NavController, private alertController: AlertController) {
     this.titleService.setTitle('Tipo Contas');
   }
 
@@ -23,9 +23,38 @@ export class TipoContaPage implements OnInit {
     }
 
     this.tiposContas = JSON.parse(localStorage.getItem('tipoBD'));
-    // if(this.tiposContas.length !== JSON.parse(localStorage.getItem('tipoBD')).length){
-    //   window.location.reload();
-    // }
   }
 
+
+  excluir(nome: string) {
+    let conta: any[] = null;
+    conta = this.tiposContas.filter((temp) => {
+      return temp.nomeTipo === nome
+    });
+    this.confirmarExclusao(conta[0]);
+  }
+
+  async confirmarExclusao(tipo: any) {
+    const alert = await this.alertController.create({
+      header: 'Confirma a exclusão?',
+      message: tipo.nomeTipo,
+      buttons: [{
+        text: 'Cancelar'
+      }, {
+        text: 'Confirmar',
+        cssClass: 'danger',
+        handler: () => {
+          this.tiposContas = JSON.parse(localStorage.getItem('tipoBD'));
+          this.tiposContas = this.tiposContas.filter((temp) => {
+            return temp.nomeTipo != tipo.nomeTipo
+          });
+          localStorage.setItem('tipoBD', JSON.stringify(this.tiposContas));
+          this.navController.navigateBack('/tipoConta');
+          window.location.href = window.location.href;
+          //this.exibirMensagem();
+        }
+      }]
+    });
+    await alert.present();
+  }
 }

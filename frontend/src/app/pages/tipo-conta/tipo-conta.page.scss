@@ -110,6 +110,7 @@
     line-height: 19px;
     /* Black */
     color: #000000;
+    cursor: pointer;
 }
 
 .divider {
@@ -120,4 +121,11 @@
     top: 35px;
     /* Gray/02 */
     border: 1px solid #e8e8e8;
+}
+
+#lixeira {
+    position: absolute;
+    top: 11px;
+    left: 90%;
+    cursor: pointer;
 }

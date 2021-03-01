@@ -77,26 +77,22 @@ export class NovaContaComponent implements OnInit {
   enviou() {
     this.contas = JSON.parse(localStorage.getItem('contaBD'));
 
-    if(this.uuid){
-      if(this.contas.find( conta => conta.id === this.uuid)){
-        this.Iconta.id = this.uuid;
-        this.Iconta.descricao = this.conta.value.descricao;
-        this.Iconta.tipo = this.conta.value.tipo;
-        this.Iconta.valor = this.conta.value.valor;
-        this.Iconta.dataVencimento = this.conta.value.dataVencimento;
-        this.Iconta.situacao = this.conta.value.situacao;
-        this.Iconta.usuario = this.usuario;
-        this.contas[this.indice] = this.Iconta;
-        this.exibirMensagem('Conta Editada!!!');
-      }
-    }else{
-      this.Iconta.id = uuid();
-      this.Iconta.descricao = this.conta.value.descricao;
+    this.Iconta.descricao = this.conta.value.descricao;
       this.Iconta.tipo = this.conta.value.tipo;
       this.Iconta.valor = this.conta.value.valor;
       this.Iconta.dataVencimento = this.conta.value.dataVencimento;
       this.Iconta.situacao = this.conta.value.situacao;
       this.Iconta.usuario = this.usuario;
+
+    if(this.uuid){
+      if(this.contas.find( conta => conta.id === this.uuid)){
+        this.Iconta.id = this.uuid;
+        this.contas[this.indice] = this.Iconta;
+        this.exibirMensagem('Conta Editada!!!');
+      }
+    }else{
+      this.Iconta.id = uuid();
+
       this.contas.push(this.Iconta);
       this.exibirMensagem('Conta cadastrada!!!');
     }

@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { NavController } from '@ionic/angular';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  Title
+} from '@angular/platform-browser';
+import {
+  NavController, AlertController
+} from '@ionic/angular';
 @Component({
   selector: 'app-conta',
   templateUrl: './conta.page.html',
@@ -35,6 +42,7 @@ export class ContaPage implements OnInit {
   constructor(
     protected titleService: Title,
     protected navController: NavController,
+    private alertController: AlertController
   ) {
     this.titleService.setTitle('Minha Conta');
   }
@@ -114,7 +122,35 @@ export class ContaPage implements OnInit {
     return total;
   }
 
-  excluir() {
-    console.log('excluir');
+  excluir(id: string) {
+    let conta: any[] = null
+    conta = this.contas.filter((temp) => {
+      return temp.id === id
+    });
+    this.confirmarExclusao(conta[0]);
+  }
+
+  async confirmarExclusao(tipo: any) {
+    const alert = await this.alertController.create({
+      header: 'Confirma a exclusão?',
+      message: tipo.nomeTipo,
+      buttons: [{
+        text: 'Cancelar'
+      }, {
+        text: 'Confirmar',
+        cssClass: 'danger',
+        handler: () => {
+          this.contas = JSON.parse(localStorage.getItem('contaBD'));
+          this.contas = this.contas.filter((temp) => {
+            return temp.id != tipo.id
+          });
+          localStorage.setItem('contaBD', JSON.stringify(this.contas));
+          this.navController.navigateBack('/conta');
+          window.location.href = window.location.href;
+          //this.exibirMensagem();
+        }
+      }]
+    });
+    await alert.present();
   }
 }

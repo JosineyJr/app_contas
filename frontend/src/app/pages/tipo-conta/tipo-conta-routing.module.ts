@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
   },
+  {
+    path: 'register/:nome',
+    component:RegisterComponent,
+  }
 ];
 
 @NgModule({
