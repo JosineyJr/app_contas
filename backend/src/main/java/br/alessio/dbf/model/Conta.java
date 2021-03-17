@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
 @Data
@@ -30,11 +31,11 @@ public class Conta {
     private Instant dataVencimento;
 
     @Column(name = "valor")
-    @NotEmpty(message = "*Por favor digite um valor")
+    @NotNull(message = "*Por favor digite um valor")
     private double valor;
 
     @Column(name = "situacao")
-    @NotEmpty(message = "*Por favor digite a situação")
+    @NotNull(message = "*Por favor digite a situação")
     private boolean situacao;
 
     @JoinColumn(name="idTipo")
