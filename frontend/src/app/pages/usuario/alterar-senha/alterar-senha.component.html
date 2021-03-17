@@ -1,19 +1,93 @@
 <ion-content>
-  <p id="signupText" [routerLink]="'/register'">Sign up</p>
+  <p id="signupText" [routerLink]="'/principal'">Menu</p>
   <p id="alterarSenhaText">Alterar Senha</p>
-  <form id="formAlterarSenha">
-      <div id="inputUser" class="input">
-          <ion-input type="password" #inputSenha placeholder="Nova senha" id="senha" ></ion-input>
-          <p class="hide" #show id="show" (click)="showPassword(inputSenha, show)">Mostrar</p>
+  <form (ngSubmit)="onSubmit()" [formGroup]="alterarForm" id="formAlterarSenha">
+    <div id="inputUser" class="input">
+      <ion-input
+        type="password"
+        #inputSenha
+        placeholder="Nova senha"
+        id="senha"
+        formControlName="novaSenha"
+      ></ion-input>
+      <p class="hide" #show id="show" (click)="showPassword(inputSenha, show)">
+        Mostrar
+      </p>
+      <div
+        *ngIf="
+          alterarForm.get('novaSenha').invalid &&
+          (alterarForm.get('novaSenha').dirty ||
+            alterarForm.get('novaSenha').touched)
+        "
+      >
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            alterarForm.get('novaSenha').errors.required ||
+            alterarForm.get('novaSenha').errors.minlength
+          "
+        >
+          <ion-text color="danger">
+            Senha obrigatório. Mínimo 5 caracteres
+          </ion-text>
+        </small>
       </div>
-      <div class="bgInput"></div>
-      <div id="inputPassword" class="input">
-          <ion-input type="password"#inputConfirmarSenha placeholder="Confirmar Senha" id="confirmarSenha" ></ion-input>
-          <p class="hide" #show2 id="show2" (click)="showPassword(inputConfirmarSenha, show2)">Mostrar</p>
+      <div *ngIf="!verificarSenhas()">
+        <small class="form-text text-danger">
+          <ion-text color="danger"> As senhas sao diferentes </ion-text>
+        </small>
       </div>
-      <div class="bgInput"></div>
-      <ion-button fill="clear" type="submit" id="button">
-          Log In
-      </ion-button>
+    </div>
+    <div class="bgInput"></div>
+    <div id="inputPassword" class="input">
+      <ion-input
+        type="password"
+        #inputConfirmarSenha
+        placeholder="Confirmar Senha"
+        id="confirmarSenha"
+        formControlName="confirmarNovaSenha"
+      ></ion-input>
+      <p
+        class="hide"
+        #show2
+        id="show2"
+        (click)="showPassword(inputConfirmarSenha, show2)"
+      >
+        Mostrar
+      </p>
+      <div
+        *ngIf="
+          alterarForm.get('confirmarNovaSenha').invalid &&
+          (alterarForm.get('confirmarNovaSenha').dirty ||
+            alterarForm.get('confirmarNovaSenha').touched)
+        "
+      >
+        <small
+          class="form-text text-danger"
+          *ngIf="
+            alterarForm.get('confirmarNovaSenha').errors.required ||
+            alterarForm.get('confirmarNovaSenha').errors.minlength
+          "
+        >
+          <ion-text color="danger">
+            Senha obrigatório. Mínimo 5 caracteres
+          </ion-text>
+        </small>
+      </div>
+      <div *ngIf="!verificarSenhas()">
+        <small class="form-text text-danger">
+          <ion-text color="danger"> As senhas sao diferentes </ion-text>
+        </small>
+      </div>
+    </div>
+    <div class="bgInput"></div>
+    <ion-button
+      fill="clear"
+      type="submit"
+      id="button"
+      [disabled]="!alterarForm.valid || !verificarSenhas()"
+    >
+      Alterar
+    </ion-button>
   </form>
 </ion-content>
