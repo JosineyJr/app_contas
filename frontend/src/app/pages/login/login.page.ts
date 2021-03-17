@@ -13,6 +13,7 @@ import { Usuario } from '../../interfaces/Usuario.interface';
 export class LoginPage implements OnInit {
   usuario = {
     id: null,
+    nome: null,
     email: null,
     senha: null,
   };
@@ -37,9 +38,8 @@ export class LoginPage implements OnInit {
     localStorage.setItem('loginBD', JSON.stringify(null));
 
     // this.pessoas = JSON.parse(localStorage.getItem('usuarioBD'));
-
-    this.login.get('email').setValue(this.usuario.email);
-    this.login.get('senha').setValue(this.usuario.senha);
+    // this.login.get('email').setValue(this.usuario.email);
+    // this.login.get('senha').setValue(this.usuario.senha);
   }
 
   async submit() {
@@ -56,6 +56,7 @@ export class LoginPage implements OnInit {
           this.usuarios[usuario].senha === this.usuario.senha
         ) {
           this.usuario.id = this.usuarios[usuario].id;
+          this.usuario.nome = this.usuarios[usuario].nome;
           localStorage.setItem('loginBD', JSON.stringify(this.usuario));
           this.navController.navigateBack('/principal');
           controle = true;
