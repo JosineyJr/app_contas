@@ -11,17 +11,17 @@ import { Usuario } from '../../interfaces/Usuario.interface';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  pessoas: any = [];
-  pessoa = {
-    userName: null,
-    password: null,
+  usuario = {
+    id: null,
+    email: null,
+    senha: null,
   };
 
   usuarios: Usuario;
 
   login = new FormGroup({
-    userName: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required]),
+    senha: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -36,15 +36,15 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     localStorage.setItem('loginBD', JSON.stringify(null));
 
-    this.pessoas = JSON.parse(localStorage.getItem('usuarioBD'));
+    // this.pessoas = JSON.parse(localStorage.getItem('usuarioBD'));
 
-    this.login.get('userName').setValue(this.pessoa.userName);
-    this.login.get('password').setValue(this.pessoa.password);
+    this.login.get('email').setValue(this.usuario.email);
+    this.login.get('senha').setValue(this.usuario.senha);
   }
 
   async submit() {
-    this.pessoa.userName = this.login.value.userName;
-    this.pessoa.password = this.login.value.password;
+    this.usuario.email = this.login.value.email;
+    this.usuario.senha = this.login.value.senha;
 
     let controle = false;
 
@@ -52,13 +52,14 @@ export class LoginPage implements OnInit {
       this.usuarios = <Usuario>json;
       for (const usuario in this.usuarios) {
         if (
-          this.usuarios[usuario].email === this.pessoa.userName &&
-          this.usuarios[usuario].senha === this.pessoa.password
+          this.usuarios[usuario].email === this.usuario.email &&
+          this.usuarios[usuario].senha === this.usuario.senha
         ) {
-          localStorage.setItem('loginBD', JSON.stringify(this.pessoa));
+          this.usuario.id = this.usuarios[usuario].id;
+          localStorage.setItem('loginBD', JSON.stringify(this.usuario));
           this.navController.navigateBack('/principal');
           controle = true;
-          this.exibirMensagem('Login realizado com sucesso!')
+          this.exibirMensagem('Login realizado com sucesso!');
           window.location.href = window.location.href.replace(
             'login',
             'principal',
@@ -72,7 +73,7 @@ export class LoginPage implements OnInit {
     }
 
     // for(var i = 0; i < this.pessoas.length; i++){
-    //   if(this.pessoas[i].userName === this.pessoa.userName && this.pessoas[i].password === this.pessoa.password){
+    //   if(this.pessoas[i].userName === this.usuario.userName && this.pessoas[i].password === this.usuario.password){
     //     localStorage.setItem('loginBD', JSON.stringify(this.pessoas[i]));
     //     this.navController.navigateBack('/principal');
     //     controle = true;

@@ -3,11 +3,11 @@
     <p id="loginText">Log in</p>
     <form [formGroup]="login" (ngSubmit)="submit()">
         <div id="inputUser" class="input">
-            <ion-input type="text" placeholder="Usuário" id="userName" formControlName="userName"></ion-input>
+            <ion-input type="text" placeholder="Email" id="userName" formControlName="email"></ion-input>
         </div>
         <div class="bgInput"></div>
         <div id="inputPassword" class="input">
-            <ion-input type="password"#inputPassword placeholder="Senha" id="password" formControlName="password"></ion-input>
+            <ion-input type="password"#inputPassword placeholder="Senha" id="password" formControlName="senha"></ion-input>
             <p #show id="show" (click)="showPassword(inputPassword, show)">Mostrar</p>
         </div>
         <div class="bgInput"></div>
