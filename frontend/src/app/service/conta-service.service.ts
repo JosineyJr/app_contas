@@ -23,6 +23,11 @@ export class ContaServiceService {
     return this.http.get(urlAuxiliar).toPromise();
   }
 
+  getContaByUsuario(id: number){
+    let urlAuxiliar = this.API +'usuario/'+ id;
+    return this.http.get(urlAuxiliar).toPromise();
+  }
+
   postConta(conta: Conta) {
     if (conta.id == null) {
       return this.http

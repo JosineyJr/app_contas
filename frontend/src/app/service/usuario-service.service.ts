@@ -23,6 +23,11 @@ export class UsuarioServiceService {
     return this.http.get(urlAuxiliar).toPromise();
   }
 
+  authenticateUsuario(email: string, senha: string) {
+    let urlAuxiliar = this.API + email + '/' + senha;
+    return this.http.get(urlAuxiliar).toPromise();
+  }
+
   postUsuario(usuario: Usuario) {
     if (usuario.id == null) {
       return this.http

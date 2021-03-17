@@ -1,13 +1,10 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  Title
-} from '@angular/platform-browser';
-import {
-  NavController, AlertController
-} from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { NavController, AlertController } from '@ionic/angular';
+import { Conta } from 'src/app/interfaces/Conta.interface';
+import { Usuario } from 'src/app/interfaces/Usuario.interface';
+import { ContaServiceService } from 'src/app/service/conta-service.service';
+import { UsuarioServiceService } from 'src/app/service/usuario-service.service';
 @Component({
   selector: 'app-conta',
   templateUrl: './conta.page.html',
@@ -18,12 +15,8 @@ export class ContaPage implements OnInit {
   lastMonth = 0;
   private sizeCircle = 725;
   contas: any;
-  contasUsuario: any = [];
-  usuario = {
-    userName: null,
-    email: null,
-    password: null,
-  };
+  contasUsuario: Conta;
+  usuario: Usuario;
   meses: any = [
     'Jan',
     'Fev',
@@ -42,7 +35,8 @@ export class ContaPage implements OnInit {
   constructor(
     protected titleService: Title,
     protected navController: NavController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private contaService: ContaServiceService,
   ) {
     this.titleService.setTitle('Minha Conta');
   }
@@ -61,28 +55,26 @@ export class ContaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.contas = JSON.parse(localStorage.getItem('contaBD'));
+    // this.contas = JSON.parse(localStorage.getItem('contaBD'));
 
     if (!this.contas) {
-      this.contas = [];
-      localStorage.setItem('contaBD', JSON.stringify(this.contas));
+      // this.contas = [];
+      // localStorage.setItem('contaBD', JSON.stringify(this.contas));
     }
     if (JSON.parse(localStorage.getItem('loginBD'))) {
       this.usuario = JSON.parse(localStorage.getItem('loginBD'));
-      this.contas = JSON.parse(localStorage.getItem('contaBD'));
-      this.verificarContas();
-      this.obterContas(this.contasUsuario);
+      // this.contas = JSON.parse(localStorage.getItem('contaBD'));
+      this.getContasByUsuario(this.usuario.id);
     } else {
       this.navController.navigateBack('/login');
     }
   }
 
-  verificarContas() {
-    for (var i = 0; i < this.contas.length; i++) {
-      if (this.contas[i].usuario.userName === this.usuario.userName) {
-        this.contasUsuario.push(this.contas[i]);
-      }
-    }
+  async getContasByUsuario(id: number) {
+    await this.contaService.getContaByUsuario(id).then(json => {
+      this.contasUsuario = <Conta>json;
+      this.obterContas(this.contasUsuario);
+    });
   }
 
   obterData(data: string): string {
@@ -115,17 +107,17 @@ export class ContaPage implements OnInit {
   }
 
   totalContas() {
-    let total = 0;
-    for (var i = 0; i < this.contasUsuario.length; i++) {
-      total += this.contasUsuario[i].valor;
-    }
-    return total;
+    // let total = 0;
+    // for (var i = 0; i < this.contasUsuario.length; i++) {
+    //   total += this.contasUsuario[i].valor;
+    // }
+    // return total;
   }
 
   excluir(id: string) {
-    let conta: any[] = null
-    conta = this.contas.filter((temp) => {
-      return temp.id === id
+    let conta: any[] = null;
+    conta = this.contas.filter(temp => {
+      return temp.id === id;
     });
     this.confirmarExclusao(conta[0]);
   }
@@ -134,22 +126,25 @@ export class ContaPage implements OnInit {
     const alert = await this.alertController.create({
       header: 'Confirma a exclusão?',
       message: tipo.nomeTipo,
-      buttons: [{
-        text: 'Cancelar'
-      }, {
-        text: 'Confirmar',
-        cssClass: 'danger',
-        handler: () => {
-          this.contas = JSON.parse(localStorage.getItem('contaBD'));
-          this.contas = this.contas.filter((temp) => {
-            return temp.id != tipo.id
-          });
-          localStorage.setItem('contaBD', JSON.stringify(this.contas));
-          this.navController.navigateBack('/conta');
-          window.location.href = window.location.href;
-          //this.exibirMensagem();
-        }
-      }]
+      buttons: [
+        {
+          text: 'Cancelar',
+        },
+        {
+          text: 'Confirmar',
+          cssClass: 'danger',
+          handler: () => {
+            this.contas = JSON.parse(localStorage.getItem('contaBD'));
+            this.contas = this.contas.filter(temp => {
+              return temp.id != tipo.id;
+            });
+            localStorage.setItem('contaBD', JSON.stringify(this.contas));
+            this.navController.navigateBack('/conta');
+            window.location.href = window.location.href;
+            //this.exibirMensagem();
+          },
+        },
+      ],
     });
     await alert.present();
   }

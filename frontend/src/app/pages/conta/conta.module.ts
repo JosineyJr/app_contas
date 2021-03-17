@@ -8,6 +8,7 @@ import { ContaPageRoutingModule } from './conta-routing.module';
 
 import { ContaPage } from './conta.page';
 import { NovaContaComponent } from './nova-conta/nova-conta.component';
+import { BrMaskerModule } from 'br-mask';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { NovaContaComponent } from './nova-conta/nova-conta.component';
     IonicModule,
     ContaPageRoutingModule,
     ReactiveFormsModule,
+    BrMaskerModule,
   ],
   declarations: [ContaPage, NovaContaComponent],
 })
