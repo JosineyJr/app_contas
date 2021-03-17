@@ -65,6 +65,8 @@ export class NovaContaComponent implements OnInit {
     }
     this.activatedRoute.params.subscribe(param => {
       if (param['id']) {
+        this.getConta(param['id']);
+        this.alterar = true;
         // for(var i = 0; i < this.contas.length; i++){
         //   if(this.contas[i].id == param['id']){
         //     this.Iconta = this.contas[i];
@@ -97,6 +99,22 @@ export class NovaContaComponent implements OnInit {
   async getContas() {
     await this.contaService.getContas().then(json => {
       this.contas = <Conta>json;
+    });
+  }
+
+  async getConta(id: number) {
+    await this.contaService.getConta(id).then(json => {
+      this.conta = <Conta>json;
+      console.log(JSON.stringify(this.conta));
+      this.contaForm.get('descricao').setValue(this.conta.descricao);
+      this.contaForm.get('tipo').setValue(this.conta.tipo.id);
+      this.contaForm.get('valor').setValue(this.conta.valor);
+      this.contaForm.get('dataVencimento').setValue(this.conta.dataVencimento);
+      if (this.conta.situacao) {
+        this.contaForm.get('situacao').setValue('1');
+      } else {
+        this.contaForm.get('situacao').setValue('0');
+      }
     });
   }
 
@@ -133,8 +151,29 @@ export class NovaContaComponent implements OnInit {
         this.navController.navigateBack('/conta');
         window.location.href = window.location.href.replace('register', '');
         this.exibirMensagem('Conta cadastrada com sucesso!');
+      } else {
+        this.exibirMensagem('Erro ao cadastrar conta');
       }
     } else {
+      this.conta.dataVencimento = new Date(
+        this.contaForm.get('dataVencimento').value,
+      );
+      this.conta.descricao = this.contaForm.get('descricao').value;
+      this.conta.valor = Number.parseFloat(this.contaForm.get('valor').value);
+      this.conta.tipo = await this.getTipo(this.contaForm.get('tipo').value);
+      this.conta.usuario = await this.authenticateUsuario(
+        this.usuario.email,
+        this.usuario.senha,
+      );
+      this.conta.situacao = this.contaForm.get('situacao').value === 0;
+      console.log(JSON.stringify(this.conta));
+      if (await this.contaService.postConta(this.conta)) {
+        this.navController.navigateBack('/conta');
+        window.location.href = window.location.href.replace('register', '');
+        this.exibirMensagem('Conta alterada com sucesso!');
+      } else {
+        this.exibirMensagem('Erro ao alterar conta');
+      }
     }
     // this.contas = JSON.parse(localStorage.getItem('contaBD'));
     // this.Iconta.descricao = this.conta.value.descricao;
