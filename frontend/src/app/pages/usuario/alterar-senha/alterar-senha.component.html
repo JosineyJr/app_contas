@@ -1,3 +1,19 @@
-<p>
-  alterar-senha works!
-</p>
+<ion-content>
+  <p id="signupText" [routerLink]="'/register'">Sign up</p>
+  <p id="alterarSenhaText">Alterar Senha</p>
+  <form id="formAlterarSenha">
+      <div id="inputUser" class="input">
+          <ion-input type="password" #inputSenha placeholder="Nova senha" id="senha" ></ion-input>
+          <p class="hide" #show id="show" (click)="showPassword(inputSenha, show)">Mostrar</p>
+      </div>
+      <div class="bgInput"></div>
+      <div id="inputPassword" class="input">
+          <ion-input type="password"#inputConfirmarSenha placeholder="Confirmar Senha" id="confirmarSenha" ></ion-input>
+          <p class="hide" #show2 id="show2" (click)="showPassword(inputConfirmarSenha, show2)">Mostrar</p>
+      </div>
+      <div class="bgInput"></div>
+      <ion-button fill="clear" type="submit" id="button">
+          Log In
+      </ion-button>
+  </form>
+</ion-content>
