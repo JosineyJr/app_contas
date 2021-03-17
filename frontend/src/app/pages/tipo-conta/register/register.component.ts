@@ -1,22 +1,10 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
-import {
-  Title
-} from '@angular/platform-browser';
-import {
-  NavController,
-  ToastController
-} from "@ionic/angular";
-import {
-  ActivatedRoute
-} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { NavController, ToastController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { Tipo } from 'src/app/interfaces/Tipo.interface';
+import { TipoServiceService } from 'src/app/service/tipo-service.service';
 
 @Component({
   selector: 'app-register',
@@ -24,84 +12,111 @@ import {
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  alterar = false;
+
   user: any;
-  tipos: any = [];
+  tipos: Tipo;
 
-  tipo = {
-    nomeTipo: null
-  }
-
+  tipo: Tipo;
   indice = null;
 
   tipoConta = new FormGroup({
-    tipo: new FormControl('', Validators.required),
+    tipo: new FormControl('', [Validators.required, Validators.minLength(5)]),
   });
-  constructor(protected titleService: Title, private activatedRoute: ActivatedRoute, protected navController: NavController, protected toastController: ToastController) {
+  constructor(
+    protected titleService: Title,
+    private activatedRoute: ActivatedRoute,
+    protected navController: NavController,
+    private tipoContaService: TipoServiceService,
+    protected toastController: ToastController,
+  ) {
     this.titleService.setTitle('Novo Tipo Conta');
   }
 
   ngOnInit() {
-    if (JSON.parse(localStorage.getItem('loginBD'))) {
-      this.user = JSON.parse(localStorage.getItem('loginBD'));
-    } else {
-      this.navController.navigateBack("/login");
-    }
+    this.getTipos();
+    // if (JSON.parse(localStorage.getItem('loginBD'))) {
+    //   this.user = JSON.parse(localStorage.getItem('loginBD'));
+    // } else {
+    //   this.navController.navigateBack('/login');
+    // }
 
-    this.tipos = JSON.parse(localStorage.getItem('tipoBD'));
-    if (!this.tipos) {
-      this.tipos = [];
-      localStorage.setItem('tipoBD', JSON.stringify(this.tipos));
-    }
+    // this.tipos = JSON.parse(localStorage.getItem('tipoBD'));
+    // if (!this.tipos) {
+    //   // this.tipos = Tipo[];
+    //   localStorage.setItem('tipoBD', JSON.stringify(this.tipos));
+    // }
 
     this.activatedRoute.params.subscribe(param => {
-      if (param['nome']) {
-        for (var i = 0; i < this.tipos.length; i++) {
-          if (this.tipos[i].nomeTipo == param['nome']) {
-            this.tipo = this.tipos[i];
-            this.indice = i;
-          }
-        }
+      if (param['id']) {
+        this.tipoContaService.getTipo(param['id']).then(json => {
+          this.tipo = <Tipo>json;
+          this.tipoConta.get('tipo').setValue(this.tipo.nome);
+          this.alterar = true;
+        });
       }
     });
 
-    this.tipoConta.get('tipo').setValue(this.tipo.nomeTipo);
+    // this.tipoConta.get('tipo').setValue(this.tipo.nome);
   }
 
-  salvarTipo() {
-    this.tipos = JSON.parse(localStorage.getItem('tipoBD'));
+  async getTipos() {
+    await this.tipoContaService.getTipos().then(json => {
+      this.tipos = <Tipo>json;
+    });
+  }
 
-    this.tipo.nomeTipo = this.tipoConta.value.tipo;
-    if (this.indice !== null) {
-      this.tipos[this.indice] = this.tipo;
-      this.exibirMensagem('Tipo de conta editado!!!');
+  async salvarTipo() {
+    if (!this.alterar) {
+      console.log('aui');
+      this.tipo = {
+        id: null,
+        nome: this.tipoConta.get('tipo').value,
+      };
     } else {
-      this.tipos.push(this.tipo);
-      this.exibirMensagem('Tipo de conta cadastrado!!!');
+      this.tipo.nome = this.tipoConta.get('tipo').value;
     }
-
-    localStorage.setItem('tipoBD', JSON.stringify(this.tipos));
-    this.navController.navigateBack('/tipoConta');
-    window.location.href = window.location.href.replace('register', '');
-
+    if (await this.tipoContaService.postTipo(this.tipo)) {
+      this.navController.navigateBack('/tipoConta');
+      window.location.href = window.location.href.replace('register', '');
+    } else {
+      console.log('shit');
+    }
+    // this.tipos = JSON.parse(localStorage.getItem('tipoBD'));
+    // this.tipo.nome = this.tipoConta.value.tipo;
+    // if (this.indice !== null) {
+    //   this.tipos[this.indice] = this.tipo;
+    //   this.exibirMensagem('Tipo de conta editado!!!');
+    // } else {
+    //   this.tipos.push(this.tipo);
+    //   this.exibirMensagem('Tipo de conta cadastrado!!!');
+    // }
+    // localStorage.setItem('tipoBD', JSON.stringify(this.tipos));
+    // this.navController.navigateBack('/tipoConta');
+    // window.location.href = window.location.href.replace('register', '');
   }
 
   async exibirMensagem(mensagem: string) {
     const toast = await this.toastController.create({
       message: mensagem,
-      duration: 1500
+      duration: 1500,
     });
     toast.present();
   }
 
-  verificarTipo(tipo: string): boolean {
-    this.tipos = JSON.parse(localStorage.getItem('tipoBD'));
-
-    for (var i = 0; i < this.tipos.length; i++) {
-      if (this.tipos[i].nomeTipo === tipo) {
+  verificarTipo(nomeTipo: string | number) {
+    for (const index in this.tipos) {
+      if (nomeTipo === this.tipos[index].nome) {
         return true;
       }
     }
-
     return false;
+    // this.tipos = JSON.parse(localStorage.getItem('tipoBD'));
+    // for (var i = 0; i < this.tipos.length; i++) {
+    //   if (this.tipos[i].nomeTipo === tipo) {
+    //     return true;
+    //   }
+    // }
+    // return false;
   }
 }

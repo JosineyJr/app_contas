@@ -1,21 +1,38 @@
 <ion-content>
-    <div id="pageHeader">
-        <p id="tipoContatext">Tipo Conta</p>
-        <p id="voltarText" [routerLink]="['/tipoConta']" routerLinkActive="router-link-active">Voltar</p>
-
+  <div id="pageHeader">
+    <p id="tipoContatext">Tipo Conta</p>
+    <p
+      id="voltarText"
+      [routerLink]="['/tipoConta']"
+      routerLinkActive="router-link-active"
+    >
+      Voltar
+    </p>
+  </div>
+  <form (ngSubmit)="salvarTipo()" #form="ngForm" [formGroup]="tipoConta">
+    <div class="input">
+      <ion-input
+        type="text"
+        placeholder="Tipo"
+        id="tipo"
+        formControlName="tipo"
+        #inputTipo
+      ></ion-input>
+      <div *ngIf="verificarTipo(inputTipo.value)">
+        <small class="form-text text-danger"> Tipo de conta já existe </small>
+      </div>
+      <div *ngIf="tipoConta.get('tipo').errors?.minlength">
+        <small class="form-text text-danger"> No mínimo 5 caracteres </small>
+      </div>
     </div>
-    <form (ngSubmit)="salvarTipo()" #form="ngForm" [formGroup]="tipoConta">
-        <div class="input">
-            <ion-input type="text" placeholder="Tipo" id="tipo" formControlName="tipo" #tipo></ion-input>
-            <div *ngIf="verificarTipo(tipo.value)">
-                <small class="form-text text-danger">
-      Tipo de conta já existe
-    </small>
-            </div>
-        </div>
-        <div class="bgInput"></div>
-        <ion-button fill="clear" type="submit" id="button" [disabled]="!tipoConta.valid || verificarTipo(tipo.value)">
-            Salvar
-        </ion-button>
-    </form>
+    <div class="bgInput"></div>
+    <ion-button
+      fill="clear"
+      type="submit"
+      id="button"
+      [disabled]="!tipoConta.valid || verificarTipo(inputTipo.value)"
+    >
+      Salvar
+    </ion-button>
+  </form>
 </ion-content>

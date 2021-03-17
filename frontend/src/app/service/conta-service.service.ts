@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Tipo } from '../interfaces/Tipo.interface';
+import { Conta } from '../interfaces/Conta.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TipoServiceService {
-  private API = 'http://localhost:8080/public/tipos/';
+export class ContaServiceService {
+  private API = 'http://localhost:8080/public/contas/';
 
   constructor(private http: HttpClient) {}
 
@@ -14,27 +14,27 @@ export class TipoServiceService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  getTipos() {
+  getContas() {
     return this.http.get(this.API).toPromise();
   }
 
-  getTipo(id: number) {
+  getConta(id: number) {
     let urlAuxiliar = this.API + id;
     return this.http.get(urlAuxiliar).toPromise();
   }
 
-  postTipo(tipo: Tipo) {
-    if (tipo.id === null) {
+  postConta(conta: Conta) {
+    if (conta.id == null) {
       return this.http
-        .post(this.API, JSON.stringify(tipo), this.httpOptions)
+        .post(this.API, JSON.stringify(conta), this.httpOptions)
         .toPromise();
     }
     return this.http
-      .put(this.API, JSON.stringify(tipo), this.httpOptions)
+      .put(this.API, JSON.stringify(conta), this.httpOptions)
       .toPromise();
   }
 
-  deleteTipo(id: number) {
+  deleteConta(id: number) {
     let urlAuxiliar = this.API + id;
     return this.http.delete(urlAuxiliar).toPromise();
   }
