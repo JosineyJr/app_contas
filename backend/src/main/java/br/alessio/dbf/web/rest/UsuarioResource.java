@@ -63,7 +63,7 @@ public class UsuarioResource {
         log.debug("REST request to save Usuario : {}", usuario);
         if (usuario.getId() != null) {
             throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Um novo usuario não pode terum ID");
+                    HttpStatus.BAD_REQUEST, "Um novo usuario não pode ter um ID");
         }
         Usuario result = usuarioService.save(usuario);
         return ResponseEntity.created(new URI("/api/usuarios/" + result.getId()))
