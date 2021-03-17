@@ -1,7 +1,7 @@
 <ion-content>
     <p id="signupText" [routerLink]="'/register'">Sign up</p>
     <p id="loginText">Log in</p>
-    <form [formGroup]="login" (ngSubmit)="enviou()">
+    <form [formGroup]="login" (ngSubmit)="submit()">
         <div id="inputUser" class="input">
             <ion-input type="text" placeholder="Usuário" id="userName" formControlName="userName"></ion-input>
         </div>

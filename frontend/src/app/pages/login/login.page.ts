@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavController, ToastController } from "@ionic/angular";
+import { NavController, ToastController } from '@ionic/angular';
+import { UsuarioServiceService } from '../../service/usuario-service.service';
+import { Usuario } from '../../interfaces/Usuario.interface';
 
 @Component({
   selector: 'app-login',
@@ -9,21 +11,25 @@ import { NavController, ToastController } from "@ionic/angular";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   pessoas: any = [];
   pessoa = {
     userName: null,
-    password: null
+    password: null,
   };
+
+  usuarios: Usuario;
 
   login = new FormGroup({
     userName: new FormControl('', [Validators.required]),
-    password: new FormControl('', [
-      Validators.required
-    ]),
+    password: new FormControl('', [Validators.required]),
   });
 
-  constructor(protected titleService: Title, private navController: NavController, private toastController: ToastController) {
+  constructor(
+    protected titleService: Title,
+    private navController: NavController,
+    private toastController: ToastController,
+    private usuarioService: UsuarioServiceService,
+  ) {
     this.titleService.setTitle('Log in');
   }
 
@@ -36,30 +42,49 @@ export class LoginPage implements OnInit {
     this.login.get('password').setValue(this.pessoa.password);
   }
 
-  enviou(){
+  async submit() {
     this.pessoa.userName = this.login.value.userName;
     this.pessoa.password = this.login.value.password;
 
     let controle = false;
 
-    for(var i = 0; i < this.pessoas.length; i++){
-      if(this.pessoas[i].userName === this.pessoa.userName && this.pessoas[i].password === this.pessoa.password){
-        localStorage.setItem('loginBD', JSON.stringify(this.pessoas[i]));
-        this.navController.navigateBack('/principal');
-        controle = true;
-        window.location.href = window.location.href.replace('login', 'principal');
+    await this.usuarioService.getUsuarios().then(json => {
+      this.usuarios = <Usuario>json;
+      for (const usuario in this.usuarios) {
+        if (
+          this.usuarios[usuario].email === this.pessoa.userName &&
+          this.usuarios[usuario].senha === this.pessoa.password
+        ) {
+          localStorage.setItem('loginBD', JSON.stringify(this.pessoa));
+          this.navController.navigateBack('/principal');
+          controle = true;
+          this.exibirMensagem('Login realizado com sucesso!')
+          window.location.href = window.location.href.replace(
+            'login',
+            'principal',
+          );
+        }
       }
+    });
+
+    if (!controle) {
+      this.exibirMensagem('Usuario ou Senha Incorretos!!');
     }
 
-    if(!controle){
-    this.exibirMensagem("Usuario ou Senha Incorretos!!");
-    }
+    // for(var i = 0; i < this.pessoas.length; i++){
+    //   if(this.pessoas[i].userName === this.pessoa.userName && this.pessoas[i].password === this.pessoa.password){
+    //     localStorage.setItem('loginBD', JSON.stringify(this.pessoas[i]));
+    //     this.navController.navigateBack('/principal');
+    //     controle = true;
+    //     window.location.href = window.location.href.replace('login', 'principal');
+    //   }
+    // }
   }
 
   async exibirMensagem(mensagem: string) {
     const toast = await this.toastController.create({
       message: mensagem,
-      duration: 1500
+      duration: 1500,
     });
     toast.present();
   }
